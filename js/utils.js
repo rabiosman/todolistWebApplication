@@ -63,3 +63,6 @@ function showAuth(){
     hideItem(userContent)
     showItem(auth)
 }
+
+//Atributos extras de configuração de e-mail
+var actionCodeSettings
