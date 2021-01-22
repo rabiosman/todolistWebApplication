@@ -31,6 +31,12 @@
 
                 <button type="submit" id="submitAuthForm">Acessar</button>
             </form>
+            <!--Redefinição de senha-->
+            <p id="passwordReset">
+                Esqueceu a sua senha?
+                <button class="alternative" onclick="sendPasswordResetEmail()">Redefinir a minha senha</button>
+            </p>
+
             <!--Alternar o formulário de autenticação para o cadastro de novas contas-->
             <p id="register">
                 Não possui uma conta?
@@ -41,11 +47,18 @@
                 Já possui uma conta?
                 <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
             </p>
+
+            <p>
+                Ou acesse usando: <br>
+                <img src="img/google.png" alt="Logotipo do Google" onclick="signInWithGoogle()">
+            </p>
         </div>
         <!--Conteúdo para usuários autenticados-->
         <div id="userContent" class="startHidden">
             <hr>
             <div id="userInfo" class="center">
+                <img id="userImg">
+                <p id="userName"></p>
                 <p id="userEmail"></p>
                 <p id="emailVerified"></p>
                 <div id="sendEmailVerificationDiv">

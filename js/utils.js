@@ -8,7 +8,9 @@ var userContent = document.getElementById('userContent')
 var userEmail = document.getElementById('userEmail')
 var emailVerified = document.getElementById('emailVerified')
 var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv')
-
+var passwordReset = document.getElementById('passwordReset')
+var userName = document.getElementById('userName')
+var userImg = document.getElementById('userImg')
 
 
 //Alterar o formulario de autenticacao para o cadastro de novas contas
@@ -16,6 +18,7 @@ function toggleToRegister() {
     authForm.submitAuthForm.innerHTML = 'Cadastrar conta'
     authFormTitle.innerHTML = 'Insira seus dados para realizar o cadastro'
 
+    hideItem(passwordReset)
     hideItem(register)
     showItem(access)
 }
@@ -27,6 +30,7 @@ function toggleToAccess() {
 
     hideItem(access)
     showItem(register)
+    showItem(passwordReset)
 }
 
 //Simplifica a exibicao de elementos da pagina
@@ -51,6 +55,9 @@ function showUserContent(user){
         emailVerified.innerHTML = 'E-mail não verificado'
         showItem(sendEmailVerificationDiv)
     }
+    userImg.src = user.photoURL ? user.photoURL : 'img/unknownUser.img'
+    userName.innerHTML = user.displayName
+
     userEmail.innerHTML = user.email
     hideItem(auth)
     showItem(userContent)
@@ -65,4 +72,6 @@ function showAuth(){
 }
 
 //Atributos extras de configuração de e-mail
-var actionCodeSettings
+var actionCodeSettings = {
+    url: 'https://todolist-b9c36.firebaseapp.com'
+}
