@@ -42,6 +42,15 @@
                 <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
             </p>
         </div>
+        <!--Conteúdo para usuários autenticados-->
+        <div id="userContent" class="startHidden">
+            <hr>
+            <div id="userInfo" class="center">
+                <p id="userEmail"></p>
+                <p>Usuário Autenticado</p>
+                <button class="alternative" onclick="signOut()">Sair</button>
+            </div>
+        </div>
     </div>
     <!--Recursos do Firebase-->
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>

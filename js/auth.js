@@ -1,3 +1,4 @@
+//Funcao que trata o envio do formulario de autenticacao
 authForm.onsubmit = function(event){
     showItem(loading)
     event.preventDefault()
@@ -19,15 +20,23 @@ authForm.onsubmit = function(event){
     }
 }
 
+//Funcao que centraliza e trata a autenticacao
 firebase.auth().onAuthStateChanged(function (user){
     hideItem(loading)
     if(user)
     {
-        console.log("Usuário autenticado")
-        console.log(user)
+        showUserContent(user)
     }
     else
     {
-        console.log("Usuário não autenticado")
+        showAuth()
     } 
 })
+
+//Função que permite ao usuário sair da conta
+function signOut(){
+    firebase.auth().signOut().catch(function(error){
+        console.log("Falha ao sair da conta")
+        console.log(error)  
+    })  
+}
