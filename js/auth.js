@@ -8,18 +8,14 @@ authForm.onsubmit = function(event){
     if(authForm.submitAuthForm.innerHTML == 'Acessar')
     {
         firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function (error){
-            console.log("Falha no acesso")
-            console.log(error)
-            hideItem(loading)
+            showError('Falha no acesso: ', error)
         })
     }
     else
     {
         
         firebase.auth().createUserWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function (error){
-            console.log("Falha no cadastro")
-            console.log(error)
-            hideItem(loading)
+            showError('Falha no cadastro: ', error)
         })
 
     }
@@ -41,8 +37,7 @@ firebase.auth().onAuthStateChanged(function (user){
 //Função que permite ao usuário sair da conta
 function signOut(){
     firebase.auth().signOut().catch(function(error){
-        console.log("Falha ao sair da conta")
-        console.log(error)  
+        showError('Falha ao sair da conta: ', error)
     })  
 }
 
@@ -53,8 +48,7 @@ function sendEmailVerification(){
     user.sendEmailVerification(actionCodeSettings).then(function(){
         alert('O e-mail de verificação foi enviado para'+ user.email +'! Verifique a sua caixa da entrada')
     }).catch(function(error){
-        alert('Houve um erro ao enviar o e-mail de verificação')
-        console.log(error)
+        showError('Houve um erro ao enviar o e-mail de verificação: ', error)
     }).finally(function (){
         hideItem(loading)
     })
@@ -69,8 +63,7 @@ function sendPasswordResetEmail(){
         firebase.auth().sendPasswordResetEmail(email, actionCodeSettings).then(function(){
             alert('E-mail de redefinição de senha foi enviado para ' + email + '.')
         }).catch(function (error){
-            alerta('Houve um erro ao enviar o e-mail de redefinição de senha')
-            console.log(error)
+            showError('Houve um erro ao enviar o e-mail de redefinição de senha ', error)
         }).finally(function (){
             hideItem(loading)
         })
@@ -85,9 +78,7 @@ function sendPasswordResetEmail(){
 function signInWithGoogle(){
     showItem(loading)
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (error){
-        alert('Houve um erro ao autenticar usando o Google')
-        console.log(error)
-        hideItem(loading)
+        showError('Houve um erro ao autenticar usando o Google ', error)
     })
 }
 
@@ -95,9 +86,7 @@ function signInWithGoogle(){
 function signInWithGitHub(){
     showItem(loading)
     firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch(function (error){
-        alert('Houve um erro ao autenticar usando o GitHub')
-        console.log(error)
-        hideItem(loading)
+        showError('Houve um erro ao autenticar usando o GitHub ', error)
     })
 }
 
@@ -105,9 +94,7 @@ function signInWithGitHub(){
 function signInWithFacebook(){
     showItem(loading)
     firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch(function (error){
-        alert('Houve um erro ao autenticar usando o Facebook')
-        console.log(error)
-        hideItem(loading)
+        showError('Houve um erro ao autenticar usando o Facebook ', error)
     })
 }
 
@@ -121,8 +108,7 @@ function updateUserName(){
         firebase.auth().currentUser.updateProfile({
             displayName: newUserName
         }).catch(function (error){
-            alert('Houve um erro ao atualizar nome de usuário')
-            console.log(error)           
+            showError('Houve um erro ao atualizar nome de usuário ', error)          
         }).finally(function (){
             hideItem(loading)
         })
@@ -143,8 +129,7 @@ function deleteUserAccount () {
         firebase.auth().currentUser.delete().then(function (){
             alert('Conta excluída com sucesso')
         }).catch(function (error){
-            alert('Houve um erro ao excluir a conta')
-            console.log(error) 
+            showError('Houve um erro ao excluir a conta', error)
         }).finally(function (){
             hideItem(loading)
         })

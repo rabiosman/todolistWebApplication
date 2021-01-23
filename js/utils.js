@@ -84,3 +84,29 @@ function showAuth(){
 var actionCodeSettings = {
     url: 'https://todolist-b9c36.firebaseapp.com'
 }
+
+//Centralizar e traduzir erros
+function showError(prefix, error) {
+    console.log(error.code)
+    hideItem(loading)
+    switch (error.code) 
+    {
+        case 'auth/invalid-email': alert(prefix + ' ' + 'E-mail inválido!')
+        break;
+
+        case 'auth/wrong-password': alert(prefix + ' ' + 'Senha incorreta!')
+        break;
+
+        case 'auth/weak-password': alert(prefix + ' ' + 'Senha fraca. Insira no mínimo 6 carácteres!')
+        break;
+
+        case 'auth/email-already-in-use': alert(prefix + ' ' + 'E-mail em já está em uso por outra conta!')
+        break;
+        
+        case 'auth/popup-closed-by-user': alert(prefix + ' ' + 'Janela de autenticação fechada pelo usuário!')
+        break;
+
+        default: alert(prefix + ' ' + error.message)
+        break;
+    }
+}
