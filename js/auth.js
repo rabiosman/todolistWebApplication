@@ -133,3 +133,20 @@ function updateUserName(){
     }
 
 }
+
+//Funcao que permite ao usuario excluir sua conta
+function deleteUserAccount () {
+    var confirmation = confirm('Deseja realmente excluir sua conta?')
+    if (confirmation)
+    {
+        showItem(loading)
+        firebase.auth().currentUser.delete().then(function (){
+            alert('Conta excluída com sucesso')
+        }).catch(function (error){
+            alert('Houve um erro ao excluir a conta')
+            console.log(error) 
+        }).finally(function (){
+            hideItem(loading)
+        })
+    }
+}

@@ -37,7 +37,7 @@ input {
 }
 
 button {
-    background-color: rgb(51, 86, 240);
+    background-color: rgb(23, 177, 2);
     font-size: 15px;
     color: white;
     padding: 4px;
@@ -57,7 +57,11 @@ p {
 }
 
 .alternative {
-    background-color: #888;
+    background-color: rgba(11, 162, 182, 0.726);
+}
+
+.danger {
+    background-color: rgb(255, 0, 0);
 }
 
 #loading {
