@@ -45,16 +45,25 @@ function hideItem(element) {
 //Funcao para mostrar as informacoes dos usuarios autenticados
 function showUserContent(user){
     console.log(user)
-    if(user.emailVerified)
+    if(user.providerData[0].providerId != 'password')
     {
-        emailVerified.innerHTML = 'E-mail verificado'
+        emailVerified.innerHTML = 'Autenticação realizada por provedor confiável'
         hideItem(sendEmailVerificationDiv)
-    } 
+    }
     else
     {
-        emailVerified.innerHTML = 'E-mail não verificado'
-        showItem(sendEmailVerificationDiv)
+        if(user.emailVerified)
+        {
+            emailVerified.innerHTML = 'E-mail verificado'
+            hideItem(sendEmailVerificationDiv)
+        } 
+        else
+        {
+            emailVerified.innerHTML = 'E-mail não verificado'
+            showItem(sendEmailVerificationDiv)
+        }
     }
+    
     userImg.src = user.photoURL ? user.photoURL : 'img/unknownUser.img'
     userName.innerHTML = user.displayName
 
