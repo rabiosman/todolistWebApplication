@@ -70,7 +70,6 @@ p {
 #auth img{
     cursor: pointer;
     margin: 4px;
-    opacity: 0.75;
 }
 
 #auth img:hover{    
