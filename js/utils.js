@@ -11,6 +11,10 @@ var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv
 var passwordReset = document.getElementById('passwordReset')
 var userName = document.getElementById('userName')
 var userImg = document.getElementById('userImg')
+var todoForm = document.getElementById('todoForm')
+
+
+
 
 
 //Alterar o formulario de autenticacao para o cadastro de novas contas
@@ -110,3 +114,6 @@ function showError(prefix, error) {
         break;
     }
 }
+
+var database = firebase.database()
+var dbRefUsers = database.ref('users')
