@@ -18,3 +18,18 @@ todoForm.onsubmit = function (event) {
         alert('O nome da tarefa não pode estar vazio.')
     }
 }
+
+//Exibe a lista de tarefas que estao armazenadas no DB
+function fillTodoList (dataSnapshot){
+    ulTodoList.innerHTML = ''
+    var num = dataSnapshot.numChildren()
+    todoCount.innerHTML = num +  (num > 1 ? ' tarefas' : ' tarefa ') + ':' //Exibe na interface o numero de tarefas
+    dataSnapshot.forEach(function (item){ //percorre todos os elementos exibidos pelo objeto
+        var value = item.val()
+        var li = document.createElement('li') //cria um elemento do tipo li
+        var spanLi = document.createElement('span')
+        spanLi.appendChild(document.createTextNode(value.name)) //adiciona o elemento de texto dentro do span
+        li.appendChild(spanLi) //Adiciona o span dentro do li
+        ulTodoList.appendChild(li) //Adiciona o li dentro do ul
+    })
+}

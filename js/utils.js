@@ -12,6 +12,8 @@ var passwordReset = document.getElementById('passwordReset')
 var userName = document.getElementById('userName')
 var userImg = document.getElementById('userImg')
 var todoForm = document.getElementById('todoForm')
+var todoCount = document.getElementById('todoCount')
+var ulTodoList = document.getElementById('ulTodoList')
 
 
 
@@ -73,6 +75,9 @@ function showUserContent(user){
 
     userEmail.innerHTML = user.email
     hideItem(auth)
+    dbRefUsers.child(firebase.auth().currentUser.uid).on('value', function (dataSnapshot){
+        fillTodoList(dataSnapshot)
+    })
     showItem(userContent)
 }
 
