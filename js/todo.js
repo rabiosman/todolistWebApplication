@@ -11,6 +11,7 @@ todoForm.onsubmit = function (event) {
         }).catch(function (error){
             showError('Falha ao adicionar tarefa', error)
         })
+        todoForm.name.value = ''
     }
         
     else
@@ -36,6 +37,13 @@ function fillTodoList (dataSnapshot){
         liRemoveBtn.setAttribute('onclick', 'removeTodo(\"' + item.key + '\")') //Configurando o onclick do botao de remocao
         liRemoveBtn.setAttribute('class', 'danger todoBtn') //Definindo classes de estilizacao para o botao de remocao
         li.appendChild(liRemoveBtn) //Adiciona o botao de remocao como elemento da lista
+
+        var liUpdateBtn = document.createElement('button') //Cria um botao para a editar a tarefa
+        liUpdateBtn.appendChild(document.createTextNode('Editar')) //Define o texto do botao como 'Editar'
+        liUpdateBtn.setAttribute('onclick', 'updateTodo(\"' + item.key + '\")') //Configurando o onclick do botao de atualizacao
+        liUpdateBtn.setAttribute('class', 'alternative todoBtn') //Definindo classes de estilizacao para o botao de atualizacao
+        li.appendChild(liUpdateBtn) //Adiciona o botao de atualizacao como elemento da lista
+
         ulTodoList.appendChild(li) //Adiciona o li dentro do ul
     })
 }
@@ -49,5 +57,26 @@ function removeTodo (key){
         dbRefUsers.child(firebase.auth().currentUser.uid).child(key).remove().catch(function (error){
             showError('Erro ao excluir tarefa!', error)
         })
+    }
+ }
+
+ function updateTodo(key) {
+    var selectedItem = document.getElementById(key)
+    var newTodoName = prompt('Escolha o novo nome da tarefa \"' + selectedItem.innerHTML + '\".', selectedItem.innerHTML)
+    if (newTodoName != '')
+    {
+        var data = {
+            name: newTodoName
+        }
+
+        dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data).then(function (){
+                console.log('Tarefa"' + data.name + '" atualizada com sucesso!')
+            }).catch(function (error){
+                showError('Falha ao editar tarefa', error)
+        })
+    }
+    else
+    {
+        alert('O nome da tarefa não pode estar em branco.')
     }
  }
